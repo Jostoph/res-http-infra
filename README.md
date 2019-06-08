@@ -4,25 +4,27 @@
 
 ## Step 1: Static HTTP server with apache httpd
 
-TODO
+### Demo
 
-About apache configuration here:
+You can launch the demo by running the following script: `docker-images/apache-php-image/run.sh`
 
-/etc/apache2/ 
+It will build the image and run the container. 
 
-apache2.confg
+Then, you'll be able to access the web page at port 9090. The IP depends on your configuration, here is an example: http://192.168.99.100:9090/
 
-/sites-available
+### Theme
 
-/sites-enabled
+We used the following theme https://startbootstrap.com/themes/creative/
 
-About the image we used here:
+### Dockerfile
 
-https://hub.docker.com/_/php
+We build an image from the official php image. Here https://hub.docker.com/_/php
 
-## Step 2: Dynamic HTTP server with express.js
+We copy our static web content inside `/var/www/html/`
 
+### Apache configuration
 
+If you access the container in interactive mode, you'll find the apache configuration here `/etc/apache2/ ` more specifically `apache2.confg` and `/sites-available`, `/sites-enabled`.
 
 ---
 
