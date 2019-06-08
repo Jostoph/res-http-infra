@@ -1,4 +1,28 @@
-const Chance = require("chance");
-const chance = Chance();
+/**
+ * @fileoverview Entrypoint of an Express Application
+ * @author Rueff Christoph, Póvoa Tiago
+ */
 
-console.log("Bonjour " + chance.name());
+const express = require("express");
+const app = express();
+
+const { Animal } = require("./animal");
+
+/**
+ * Route : /test
+ */
+app.get("/test", (req, res) => {
+  res.send("Hello - test is working\n");
+});
+
+/**
+ * Route : /
+ * Send an array of randomly generated Animals
+ */
+app.get("/", (req, res) => {
+  res.send(Animal.generate());
+});
+
+app.listen(3000, () => {
+  console.log("Accepting HTTP requests on port 3000");
+});

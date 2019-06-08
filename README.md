@@ -30,7 +30,49 @@ If you access the container in interactive mode, you'll find the apache configur
 
 ## Step 2: Dynamic HTTP server with express.js
 
-TODO
+### Demo
+
+You can launch the demo by running the following script: `docker-images/express-image/run.sh`
+
+It will build the image and run the container.
+
+Then, you'll be able to access the web page at port 9091 in a web browser. The IP depends on your configuration, here are some examples: http://192.168.99.100:9091/ or http://localhost:9091/
+
+You can also access it with `telnet` using the following command (IP depends on your configuration) : `telnet localhost 9091` and after `GET / HTTP/1.0`. Since the server sends back a json array, you may find more comfortable to use Postman (because of auto-indent).
+
+### JSON Payload
+
+We generate animals with species, gender, name, profession and country. Then we use a method to generate a few of them (A quantity between 1 and 10).
+
+Here is an example of payload. 
+
+```json
+[
+    {
+        "species": "Vaquita",
+        "gender": "Male",
+        "name": "Mr. Douglas Edwards",
+        "profession": "Lead EEO Compliance Manager",
+        "country": "Botswana"
+    },
+    {
+        "species": "Harbor Porpoise",
+        "gender": "Female",
+        "name": "Mrs. Annie Thomas",
+        "profession": "Junior Computer Operator",
+        "country": "Benin"
+    },
+    {
+        "species": "Whistler",
+        "gender": "Male",
+        "name": "Mr. Stephen Lamb",
+        "profession": "Senior Fashion Merchandiser",
+        "country": "Bulgaria"
+    }
+]
+```
+
+
 
 ---
 
