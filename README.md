@@ -8,9 +8,11 @@
 
 You can launch the demo by running the following script: `docker-images/apache-php-image/run.sh`
 
-It will build the image and run the container. 
+It will build the image and run the container.
 
-Then, you'll be able to access the web page at port 9090. The IP depends on your configuration, here is an example: http://192.168.99.100:9090/
+Then, you'll be able to access the web page at port 9090 in a web browser. The IP depends on your configuration, here are some examples: http://192.168.99.100:9090/ or http://localhost:9090/
+
+You can also access it with `telnet` using the following command (IP depends on your configuration) : `telnet localhost 9090` and after `GET / HTTP/1.0`
 
 ### Theme
 
