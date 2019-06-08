@@ -28,6 +28,10 @@ We copy our static web content inside `/var/www/html/`
 
 If you access the container in interactive mode, you'll find the apache configuration here `/etc/apache2/ ` more specifically `apache2.confg` and `/sites-available`, `/sites-enabled`.
 
+## Step 2: Dynamic HTTP server with express.js
+
+TODO
+
 ---
 
 ## Objectives
