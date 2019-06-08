@@ -74,17 +74,11 @@ Here is an example of payload.
 
 ## Step 3: Reverse proxy with apache (static configuration)
 
-- You have a GitHub repo with everything needed to build the Docker image for the container.
-- You can do a demo, where you start from an "empty" Docker environment (no container running) and where you start 3 containers: static server, dynamic server and reverse proxy; in the demo, you prove that the routing is done correctly by the reverse proxy.
-- You can explain and prove that the static and dynamic servers cannot be reached directly (reverse proxy is a single entry point in the infra). 
-- You are able to explain why the static configuration is fragile and needs to be improved.
-- You have **documented** your configuration in your report.
-
 ### Demo
 
 #### Before your start
 
-You may want to add `192.168.99.100 demo.res.ch` in your hosts file. This is dependent of your environment. It could be for example `etc/hosts`
+You may want to add `192.168.99.100 demo.res.ch` in your hosts file. This is dependent of your environment. It could be for example `/etc/hosts`
 
 If you want to test with telnet only, you should add the host section. Here is an example :
 
