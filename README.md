@@ -78,7 +78,7 @@ Here is an example of payload.
 
 #### Before your start
 
-You may want to add `192.168.99.100 demo.res.ch` in your hosts file. This is dependent of your environment. It could be for example `etc/hosts`
+You may want to add `192.168.99.100 demo.res.ch` in your hosts file. This is dependent of your environment. It could be for example `/etc/hosts`
 
 If you want to test with telnet only, you should add the host section. Here is an example :
 
@@ -92,7 +92,7 @@ As mentionned in the previous section, the IP depends on your configuration.
 
 #### Running the demo
 
-You can launch the demo by running the following script: `docker-images/apache-reverse-proxy/run.sh`
+You can launch the demo by running the following script: `docker-images/apache-static-reverse-proxy/run.sh`  *(we've put the old configuration with static IP in this folder, the other one concerns the point 5 )*
 
 It will build three images and run them. The two from step 1 and 2 (in background), and the new one which is a reverse proxy. 
 
@@ -126,6 +126,30 @@ It is updated every 6 seconds so a user has time to read. You can see the AJAX r
 #### Why you'd get an error without a reverse proxy
 
 Because of the **same-origin policy**.  For security reasons, your browser restricts cross-origin HTTP requests. 
+
+## Step 5: Dynamic reverse proxy configuration
+
+### Replacing static configuration
+
+As presented in the webcast, we used a PHP script to inject env variables. If you inspect `apache2-foreground` file, you'll see the following line:
+
+```sh
+php /var/apache2/templates/config-template.php > /etc/apache2/sites-available/001-reverse-proxy.conf
+```
+
+which allows us to do this particular task. It will modify `001-reverse-proxy.conf` so it has the correct IPs in it.
+
+### Demo
+
+You can launch the demo by running the following script: `docker-images/apache-reverse-proxy/run.sh` 
+
+You could as well launch multiple docker images on your own, and then start the reverse proxy with:
+
+```
+docker run -e STATIC_APP=172.17.0.X:80 -e DYNAMIC_APP=172.17.0.Y:3000 --name apache_rp -p 8080:80 res/apache_rp
+```
+
+*(replace X and Y according to your configuration)*
 
 ---
 

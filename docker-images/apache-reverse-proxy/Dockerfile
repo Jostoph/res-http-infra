@@ -1,6 +1,12 @@
-FROM php:7.2-apache
+FROM php:5.6-apache
 
 LABEL authors = "Tiago Povoa, Christoph Rouff soit Rueff"
+
+# We copy our tuned version of the apache2-foreground file
+COPY apache2-foreground /usr/local/bin/
+
+# Copying config-template.php
+COPY templates /var/apache2/templates
 
 COPY conf/ /etc/apache2
 
