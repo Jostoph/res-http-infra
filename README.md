@@ -115,6 +115,24 @@ None of the containers (static and dynamic) can be accessed directly. Since the 
 
 Anything from another Docker running, having to relaunch a docker, etc. would compromise the reverse proxy's configuration. The IPs are hardcoded for testing purposes. We have to find a way to dynamically adapt this configuration.
 
+## Step 4: AJAX requests with JQuery
+
+### Demo
+
+Using the same script as the previous step `docker-images/apache-reverse-proxy/run.sh` you can run the demo.
+
+By accessing http://demo.res.ch:8080/ you should see a paragraph automatically getting updated. It should look something like this example: 
+
+```
+Hello there! I'm Miss Winifred Stokes, a Tyrant Flycatcher currently working as Apprentice Microbiologist in Northern Mariana Islands
+```
+
+It is updated every 6 seconds so a user has time to read. You can see the AJAX requests with the developpers tool in the section `network > XHR`
+
+### Why you'd get an error without a reverse proxy
+
+Because of the **same-origin policy**.  For security reasons, your browser restricts cross-origin HTTP requests. 
+
 ---
 
 ## Objectives
