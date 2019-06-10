@@ -141,7 +141,9 @@ which allows us to do this particular task. It will modify `001-reverse-proxy.co
 
 ### Demo
 
-You can launch the demo by running the following script: `docker-images/apache-reverse-proxy/run.sh` 
+You can launch the demo by running the following script: `docker-images/apache-reverse-proxy/run.sh`
+
+The docker Ip addresses of the static and dynamic applications are automatically retrived by inspecting the containers after they are started and are used in the reverse proxy run arguments `STATIC_APP` and `DYNAMIC_APP`.
 
 You could as well launch multiple docker images on your own, and then start the reverse proxy with:
 
@@ -149,7 +151,6 @@ You could as well launch multiple docker images on your own, and then start the 
 docker run -e STATIC_APP=172.17.0.X:80 -e DYNAMIC_APP=172.17.0.Y:3000 --name apache_rp -p 8080:80 res/apache_rp
 ```
 
-*(replace X and Y according to your configuration)*
 
 ## Additional steps
 
