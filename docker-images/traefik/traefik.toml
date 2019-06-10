@@ -1,0 +1,6 @@
+debug = true
+
+# Docker configuration
+[docker]
+domain = "demo.res.ch"
+watch = true
