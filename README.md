@@ -151,6 +151,28 @@ docker run -e STATIC_APP=172.17.0.X:80 -e DYNAMIC_APP=172.17.0.Y:3000 --name apa
 
 *(replace X and Y according to your configuration)*
 
+## Additional steps
+
+### Load balancing, Sticky-Session
+
+In order to implement these features, we used [Traefik](https://traefik.io/). It is a modern reverse-proxy and load balancer written in Go. It supports both Weighted Round Robin and Dynamic Round Robin.
+
+It uses a concept of entrypoint to forward correctly to the correct microservice. 
+
+You can run the demo by using the script `docker-images/start-demo.sh`. 
+
+It will use a `docker-compose.yml` to launch Traefik and multiple containers of both the web page and the express image.
+
+We passed an argument so you have access to the API web page to see it in action. To see it, simply go to `demo.res.ch:8080` *(this is the specific port used by Traefik for this purpose)*. You'll be able to see the same "service" with many containers and each having a different IP.
+
+You can specify if you want sticky sessions like this `-"traefik.backend.loadbalancer.sticky=true"` as you can see in the `docker-compose.yml` file.
+
+### Management UI
+
+For this final step, we used [Portainer](https://hub.docker.com/r/portainer/portainer/). We mapped it to `demo.res.ch:9000`. It is a GUI manager for Docker. We added it directly inside of the docker-compose so you don't have to do anything more except creating a local account the first time you want to access the management page.
+
+On the left side menu, you'll see "Containers". From here, you'll be able to monitor all your docker containers. In addition, you can easily run, kill, stop, remove,…
+
 ---
 
 ## Objectives
@@ -222,7 +244,6 @@ The third objective is to practice our usage of **Docker**. All the components o
 * You are able to explain why the static configuration is fragile and needs to be improved.
 * You have **documented** your configuration in your report.
 
-
 ## Step 4: AJAX requests with JQuery
 
 ### Webcasts
@@ -261,7 +282,7 @@ The third objective is to practice our usage of **Docker**. All the components o
 ### Load balancing: multiple server nodes (0.5pt)
 
 * You extend the reverse proxy configuration to support **load balancing**. 
-* You show that you can have **multiple static server nodes** and **multiple dynamic server nodes**. 
+* You show that you can have **multiple static server nodes** and **multiple dynamic server nodes**.
 * You prove that the **load balancer** can distribute HTTP requests between these nodes.
 * You have **documented** your configuration and your validation procedure in your report.
 
