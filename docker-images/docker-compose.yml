@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  reverse-proxy:
+    build: ./traefik
+    image: res/traefik
+    command: --api --docker # enable web UI and listen to docker
+    labels:
+      - "traefik.enable=true"
+    ports:
+      - "80:80"
+      - "8080:8080" # traefik web api port
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock # listen to docker events
+  static-http:
+    build: ./apache-php-image/
+    image: res/apache_php
+    labels:
+      - "traefik.enable=true"
+      - "traefik.backend=apache-php"
+      - "traefik.port=80"
+      - "traefik.backend.loadbalancer.sticky=false"
+      - "traefik.frontend.rule=PathPrefix: /"
+  express-dynamic:
+    build: ./express-image/
+    image: res/express_dynamic
+    labels:
+      - "traefik.enable=true"
+      - "traefik.backend=express-animals"
+      - "traefik.port=80"
+      - "traefik.backend.loadbalancer.sticky=true"
+      - "traefik.frontend.rule=PathPrefixStrip: /api/animals"
+  portainer:
+    image: portainer/portainer
+    command: -H unix:///var/run/docker.sock
+    restart: always
+    ports:
+      - 9000:9000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+volumes:
+  portainer_data:
